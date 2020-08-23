@@ -1,0 +1,35 @@
+body {
+    background-color: #3fc1c9;
+}
+
+header {
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    color: #364f6b;
+}
+
+header h1 {
+    font-size: 45px;
+}
+
+main {
+    margin: 0 auto;
+    min-width: 980px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.icons input {
+    width: 200px;
+    transition: transform 0.2s;
+    padding-top: 130px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.icons input:hover {
+    transform: scale(1.2);
+}
