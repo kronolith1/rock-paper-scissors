@@ -1,18 +1,21 @@
 const buttons = document.querySelectorAll('input');
-buttons.forEach(button => button.addEventListener('click', playerPlay));
+buttons.forEach(button => button.addEventListener('click', game));
 
+function showRoundBanner(round) {
+    document.getElementById('roundBannerMsg').style.display="inline";
+}
 
 function playerPlay(e) {
-    let playerSelection;
-    if (this.id === 'rock-button') {
-        playerSelection = 'rock';
-    } else if (this.id === 'paper-button') {
-        playerSelection = 'paper';
+    let playerChoice;
+    if (e === 'rock-button') {
+        playerChoice = 'rock';
+    } else if (e === 'paper-button') {
+        playerChoice = 'paper';
     } else {
-        playerSelection = 'scissors';
+        playerChoice = 'scissors';
     }
-    document.getElementById('startmessage').style.visibility="hidden";
-    console.log(playerSelection)
+
+    return playerChoice;
 };
 
 function computerPlay() {
@@ -49,27 +52,43 @@ function playRound(playerSelection, computerSelection) {
             return 'Computer wins!'
             computerWins++;
         } else {
-            return 'You win!'
             playerWins++;
+            return 'You win!'
         }
     }
 }
 
-function game() {
+function game(e) {
+    let clickedButton = this.id;
     let playerWins = 0;
     let computerWins = 0;
+    let round = 0;
+
+    showRoundBanner(round);
     
     const computerSelection = computerPlay();
+    const playerSelection = playerPlay(clickedButton);
 
+    console.log(playerSelection);
+    console.log(computerSelection);
     const result = playRound(playerSelection, computerSelection);
 
     if (result == 'Computer wins!') {
         computerWins++;
+        document.getElementById('computerWonMsg').style.display="inline";
     } else if (result == 'You win!') {
         playerWins++;
+        document.getElementById('playerWonMsg').style.display="inline";
     }
 
     console.log(`Round - Computer: ${computerSelection}, You: ${playerSelection}. ${result}
     Total score - Computer: ${computerWins}, You: ${playerWins}`)
+
+    document.getElementById('rock-button').disabled="true";
+    document.getElementById('startmessage').style.display="none";
+    document.getElementById('playerChoice').style.visibility="visible";
+    document.getElementById('computerChoice').style.visibility="visible";
+    document.getElementById(`${playerSelection}-player-img`).style.display="inline";
+    document.getElementById(`${computerSelection}-computer-img`).style.display="inline";
     
 }

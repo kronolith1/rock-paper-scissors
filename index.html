@@ -10,6 +10,7 @@
 <body>
     <header>
         <h1>Rock, paper, scissors</h1>
+        <h2 style="display: none;" id="roundBannerMsg">Best out of 5!</h2>
     </header>
     <main>
         <div class="icons">
@@ -19,8 +20,24 @@
         </div>
 
         <div class="data-div">
-            <div class="startmessage" id="startmessage">
+            <span class="startmessage" id="startmessage">
                 <h2>Click on one of the pictures to start playing!</h2>
+            </span>
+            <div class="playerChoice" id="playerChoice">
+                <h2>Your choice:</h2>
+                <img style="display: none;" src="images/rock.png" id="rock-player-img">
+                <img style="display: none;" src="images/paper.png" id="paper-player-img">
+                <img style="display: none;" src="images/scissors.png" id="scissors-player-img">
+            </div>
+            <div class="computerChoice" id="computerChoice">
+                <h2>AI's choice:</h2>
+                <img style="display: none;" src="images/rock.png" id="rock-computer-img">
+                <img style="display: none;" src="images/paper.png" id="paper-computer-img">
+                <img style="display: none;" src="images/scissors.png" id="scissors-computer-img">
+            </div>
+            <div class="roundWonMessage" id="roundWonMessage"> 
+                <h2 style="display: none;" id="playerWonMsg">YOU WON!</h2>
+                <h2 style="display: none;" id="computerWonMsg">AI WON!</h2>
             </div>
         </div>
     </main>
