@@ -1,12 +1,18 @@
-const buttons = document.querySelectorAll('.button');
+const buttons = document.querySelectorAll('input');
 buttons.forEach(button => button.addEventListener('click', playerPlay));
 
+
 function playerPlay(e) {
-    switch (this.id) {
-        case 'rock-button':
-            const playerSelection = 'rock';
-            console.log(playerSelection);
-    };
+    let playerSelection;
+    if (this.id === 'rock-button') {
+        playerSelection = 'rock';
+    } else if (this.id === 'paper-button') {
+        playerSelection = 'paper';
+    } else {
+        playerSelection = 'scissors';
+    }
+    document.getElementById('startmessage').style.visibility="hidden";
+    console.log(playerSelection)
 };
 
 function computerPlay() {
