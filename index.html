@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RPS-Game</title>
+    <title>RPS-Game</title>
 
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <h1>Rock, paper, scissors</h1>
-        <h2 style="display: none;" id="roundBannerMsg">Best out of 5!</h2>
+        <h2 style="display: none;" id="banner-message">Best out of 5!</h2>
     </header>
+    
     <main>
         <div class="icons">
-            <input type="image" src="images/rock.png" class="button" id="rock-button" />
-            <input type="image" src="images/paper.png" class="button" id="paper-button" />
-            <input type="image" src="images/scissors.png" class="button" id="scissors-button" />
+            <input type="image" src="images/rock.png" class="button" id="rock" />
+            <input type="image" src="images/paper.png" class="button" id="paper" />
+            <input type="image" src="images/scissors.png" class="button" id="scissors" />
         </div>
 
         <div class="data-div">
-            <span class="startmessage" id="startmessage">
+            <div class="start-message" id="start-message">
                 <h2>Click on one of the pictures to start playing!</h2>
-            </span>
-            <div class="playerChoice" id="playerChoice">
+            </div>
+
+            <div class="we-have-a-winner" id="we-have-a-winner">
+                <h2 id="winner-banner"></h2>
+                <button onClick="window.location.reload();">PLAY AGAIN</button>
+            </div>
+
+            <div class="player-choice" id="player-choice">
                 <h2>Your choice:</h2>
-                <img style="display: none;" src="images/rock.png" id="rock-player-img">
-                <img style="display: none;" src="images/paper.png" id="paper-player-img">
-                <img style="display: none;" src="images/scissors.png" id="scissors-player-img">
-            </div>
-            <div class="computerChoice" id="computerChoice">
+                <img src="#" id="player-img">
+           </div>
+
+            <div class="computer-choice" id="computer-choice">
                 <h2>AI's choice:</h2>
-                <img style="display: none;" src="images/rock.png" id="rock-computer-img">
-                <img style="display: none;" src="images/paper.png" id="paper-computer-img">
-                <img style="display: none;" src="images/scissors.png" id="scissors-computer-img">
+                <img src="#" id="computer-img">
             </div>
-            <div class="roundWonMessage" id="roundWonMessage"> 
-                <h2 style="display: none;" id="playerWonMsg">YOU WON!</h2>
-                <h2 style="display: none;" id="computerWonMsg">AI WON!</h2>
+
+            <div class="round-won-message" id="round-won-message"> 
+                <h2 id="who-won-message"></h2>
+            </div>
+
+            <div class="playerscore" id="playerscore">
+                <h2>Your score:</h2>
+                <h1 id="player-score-count"></h1>
+            </div>
+
+            <div class="computerscore" id="computerscore">
+                <h2>AI's score:</h2>
+                <h1 id="computer-score-count"></h1>
             </div>
         </div>
     </main>
-
-    <footer>
-
-    </footer>
 </body>
     <script type="text/javascript" src="script.js"></script>
 </html>

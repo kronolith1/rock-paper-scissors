@@ -1,21 +1,43 @@
-const buttons = document.querySelectorAll('input');
-buttons.forEach(button => button.addEventListener('click', game));
+let playerWins = 0;
+let computerWins = 0;
+let round = 0;
 
-function showRoundBanner(round) {
-    document.getElementById('roundBannerMsg').style.display="inline";
-}
+function startGame(e) {
+    // Get the ID of the clicked button, which corresponds with the player's choice
+    let playerSelection = this.id;
 
-function playerPlay(e) {
-    let playerChoice;
-    if (e === 'rock-button') {
-        playerChoice = 'rock';
-    } else if (e === 'paper-button') {
-        playerChoice = 'paper';
+    // Get the computer's play and the result (who won)
+    let computerSelection = computerPlay();
+    let result = playRound(playerSelection, computerSelection);
+
+    // If it's the first round, we'll have to make some DOM changes first
+    if (round === 0) {
+        changeFirstRoundDivs();
+    };
+
+    // Show the choices both players made
+    document.getElementById('player-img').src = `images/${playerSelection}.png`;
+    document.getElementById('computer-img').src = `images/${computerSelection}.png`;
+
+    // Let's see who won this round!
+    if (result == 'computerWins') {
+        document.getElementById('who-won-message').textContent = 'AI won this round!';
+    } else if (result == 'playerWins') {
+        document.getElementById('who-won-message').textContent = 'You won this round!';
     } else {
-        playerChoice = 'scissors';
-    }
+        document.getElementById('who-won-message').textContent = "That's a draw!";
+    };
 
-    return playerChoice;
+    // Update the scoreboard
+    document.getElementById('player-score-count').textContent = playerWins;
+    document.getElementById('computer-score-count').textContent = computerWins;
+
+    // If either the player or computer won 5 times, we have a winner!
+    if (playerWins === 5 || computerWins === 5) {
+        changeWinnerDivs();
+    };
+
+    round++;
 };
 
 function computerPlay() {
@@ -24,71 +46,70 @@ function computerPlay() {
     return plays[Math.floor(Math.random() * plays.length)];
 };
 
+function changeFirstRoundDivs() {
+    document.getElementById('start-message').style.display='none';
+    document.getElementById('banner-message').style.display='inline';
+    document.getElementById('player-choice').style.visibility='visible';
+    document.getElementById('computer-choice').style.visibility='visible';
+    document.getElementById('playerscore').style.visibility='visible';
+    document.getElementById('computerscore').style.visibility='visible';
+};
+
+function changeWinnerDivs() {
+    document.getElementById('player-choice').style.visibility='hidden';
+    document.getElementById('computer-choice').style.visibility='hidden';
+    document.getElementById('round-won-message').style.visibility='hidden';
+    document.getElementById('rock').disabled = true;
+    document.getElementById('paper').disabled = true;
+    document.getElementById('scissors').disabled = true;
+
+    if (playerWins === 3) {
+        document.getElementById('winner-banner').textContent = `Congrats! You won!
+            Click the button to play again.`;
+    } else {
+        document.getElementById('winner-banner').textContent = `Too bad! You lost!
+            Click the button to try again...`;
+    };
+
+    document.getElementById('we-have-a-winner').style.visibility='visible';
+};
+
 function playRound(playerSelection, computerSelection) {
     if (playerSelection.toLowerCase() === computerSelection) {
-        return 'Draw! Nobody wins this round!';
-    }
+        return 'draw';
+    };
 
     if (playerSelection.toLowerCase() === 'rock') {
         if (computerSelection === 'paper') {
-            return 'Computer wins!';
+            computerWins++;
+            return 'computerWins';
         } else {
-            return 'You win!';
+            playerWins++;
+            return 'playerWins';
         }
-    }
+    };
 
     if (playerSelection.toLowerCase() === 'paper') {
         if (computerSelection === 'scissors') {
-            return 'Computer wins!'
             computerWins++;
+            return 'computerWins';
         } else {
-            return 'You win!'
             playerWins++;
+            return 'playerWins';
         }
-    }
+    };
 
     if (playerSelection.toLowerCase() === 'scissors') {
         if (computerSelection == 'rock') {
-            return 'Computer wins!'
             computerWins++;
+            return 'computerWins';
         } else {
             playerWins++;
-            return 'You win!'
+            return 'playerWins';
         }
-    }
-}
+    };
+};
 
-function game(e) {
-    let clickedButton = this.id;
-    let playerWins = 0;
-    let computerWins = 0;
-    let round = 0;
 
-    showRoundBanner(round);
-    
-    const computerSelection = computerPlay();
-    const playerSelection = playerPlay(clickedButton);
-
-    console.log(playerSelection);
-    console.log(computerSelection);
-    const result = playRound(playerSelection, computerSelection);
-
-    if (result == 'Computer wins!') {
-        computerWins++;
-        document.getElementById('computerWonMsg').style.display="inline";
-    } else if (result == 'You win!') {
-        playerWins++;
-        document.getElementById('playerWonMsg').style.display="inline";
-    }
-
-    console.log(`Round - Computer: ${computerSelection}, You: ${playerSelection}. ${result}
-    Total score - Computer: ${computerWins}, You: ${playerWins}`)
-
-    document.getElementById('rock-button').disabled="true";
-    document.getElementById('startmessage').style.display="none";
-    document.getElementById('playerChoice').style.visibility="visible";
-    document.getElementById('computerChoice').style.visibility="visible";
-    document.getElementById(`${playerSelection}-player-img`).style.display="inline";
-    document.getElementById(`${computerSelection}-computer-img`).style.display="inline";
-    
-}
+const buttons = document.querySelectorAll('input');
+buttons.forEach(button => button.addEventListener('click', startGame));
