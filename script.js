@@ -63,7 +63,7 @@ function changeWinnerDivs() {
     document.getElementById('paper').disabled = true;
     document.getElementById('scissors').disabled = true;
 
-    if (playerWins === 3) {
+    if (playerWins === 5) {
         document.getElementById('winner-banner').textContent = `Congrats! You won!
             Click the button to play again.`;
     } else {
