@@ -66,7 +66,7 @@ function changeWinnerDivs() {
     if (playerWins === 5) {
         document.getElementById('winner-banner').textContent = `Congrats! You won!
             Click the button to play again.`;
-    } else {
+    } else if (computerWins === 5) {
         document.getElementById('winner-banner').textContent = `Too bad! You lost!
             Click the button to try again...`;
     };
